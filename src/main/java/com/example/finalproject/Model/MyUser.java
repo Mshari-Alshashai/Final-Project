@@ -42,5 +42,17 @@ public class MyUser {
     @Pattern(regexp = "PLAYER|DEVELOPER|REVIEWER|ADMIN",message = "Role must be PLAYER, DEVELOPER, REVIEWER, or ADMIN")
     private String role;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Player player;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Developer developer;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Reviewer reviewer;
+
 
 }

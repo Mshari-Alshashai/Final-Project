@@ -1,5 +1,6 @@
 package com.example.finalproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,30 @@ public class Request {
 
     @Column(nullable = false)
     private String status;
+
+    @ManyToOne
+    @JsonIgnore
+    private Developer developer;
+
+    @ManyToOne
+    @JsonIgnore
+    private Player player;
+
+    @ManyToOne
+    @JsonIgnore
+    private Reviewer reviewer;
+
+    @ManyToOne
+    @JsonIgnore
+    private Game game;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private SupportTicket supportTicket;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Transaction transaction;
 
 
 }

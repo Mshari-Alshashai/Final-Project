@@ -1,5 +1,6 @@
 package com.example.finalproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -32,4 +34,36 @@ public class Game {
     @NotEmpty(message = "Empty name")
     @Column(nullable = false)
     private String size;
+
+    @ManyToOne
+    @JsonIgnore
+    private Developer developer;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Player> players;
+
+    @ManyToOne
+    @JsonIgnore
+    private WishList wishlist;
+
+    @ManyToOne
+    @JsonIgnore
+    private Genre genre;
+
+    @ManyToMany(mappedBy = "games")
+    private Set<Tag> tags;
+
+    @ManyToMany(mappedBy = "games")
+    private Set<Badge> badges;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
+    private Set<Review> reviews;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Analytics analytics;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
+    private Set<Request> requests;
 }

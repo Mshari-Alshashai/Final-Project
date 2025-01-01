@@ -1,7 +1,10 @@
 package com.example.finalproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -11,9 +14,25 @@ import lombok.*;
 public class Developer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
     private String bio;
+
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+    private MyUser myUser;
+
+    @ManyToMany(mappedBy = "developers")
+    private Set<Platform> platforms;
+
+    @ManyToMany(mappedBy = "developers")
+    private Set<Engine> engines;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "developer")
+    private Set<Request> requests;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "developer")
+    private Set<Game> games;
 }
