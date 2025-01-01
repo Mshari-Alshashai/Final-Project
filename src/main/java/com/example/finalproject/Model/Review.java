@@ -1,5 +1,6 @@
 package com.example.finalproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +28,20 @@ public class Review {
 
 
     private LocalDateTime reviewDate;
+
+    @ManyToOne
+    @JsonIgnore
+    private Player player;
+
+    @ManyToOne
+    @JsonIgnore
+    private Reviewer reviewer;
+
+    @ManyToOne
+    @JsonIgnore
+    private Analytics analytics;
+
+    @ManyToOne
+    @JsonIgnore
+    private Game game;
 }

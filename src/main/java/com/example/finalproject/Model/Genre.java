@@ -3,6 +3,8 @@ package com.example.finalproject.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,4 +17,7 @@ public class Genre {
     private Integer id;
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")
+    private Set<Game> games;
 }

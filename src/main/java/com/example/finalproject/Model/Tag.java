@@ -1,10 +1,13 @@
 package com.example.finalproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,4 +22,8 @@ public class Tag {
 
     @Column(nullable = false)
     private String name;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Game> games;
 }

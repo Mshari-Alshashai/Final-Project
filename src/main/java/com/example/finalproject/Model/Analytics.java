@@ -1,10 +1,13 @@
 package com.example.finalproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,7 +17,6 @@ import lombok.Setter;
 public class Analytics {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
@@ -28,4 +30,12 @@ public class Analytics {
 
     @Column(nullable = false)
     private Integer averageRating;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "analytics")
+    private Set<Review> reviews;
+
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+    private Game game;
 }

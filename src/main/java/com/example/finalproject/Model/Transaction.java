@@ -1,5 +1,6 @@
 package com.example.finalproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +17,6 @@ import java.time.LocalDateTime;
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer transactionId;
 
     @Column(unique = true, nullable = false)
@@ -29,6 +29,11 @@ public class Transaction {
 
     @Column(nullable = false)
     private String status;
+
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+    private Request request;
 
 
 }

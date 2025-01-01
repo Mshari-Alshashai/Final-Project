@@ -1,10 +1,13 @@
 package com.example.finalproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -21,5 +24,8 @@ public class Engine {
     @Column(nullable = false)
     private String name;
 
+    @ManyToMany
+    @JsonIgnore
+    private Set<Developer> developers;
 
 }
