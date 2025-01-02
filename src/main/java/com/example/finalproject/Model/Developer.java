@@ -35,4 +35,7 @@ public class Developer {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "developer")
     private Set<Game> games;
+
+
+    private Analytics analytics;
 }

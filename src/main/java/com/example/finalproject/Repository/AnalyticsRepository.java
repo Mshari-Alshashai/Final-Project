@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AnalyticsRepository extends JpaRepository<Analytics, Integer> {
     Analytics findAnalyticsById(Integer id);
+
+
 }

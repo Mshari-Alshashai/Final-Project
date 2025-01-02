@@ -26,6 +26,7 @@ public class DeveloperService {
     private final DeveloperRepository developerRepository;
     private final ReviewRepository reviewRepository;
 
+    //Get developer by id
     public Developer getMyDeveloper(Integer userId) {
         MyUser user = authRepository.findMyUserById(userId);
         if (user == null) throw new ApiException("user not found");
@@ -39,8 +40,8 @@ public class DeveloperService {
         MyUser myUser = new MyUser(null, developerIDTO.getUsername(), developerIDTO.getPassword(), developerIDTO.getName(), developerIDTO.getEmail(), developerIDTO.getPhoneNumber(), "DEVELOPER", null, null, null);
 
         developer.setMyUser(myUser);
+        Developer developer = convertDeveloperDTOToDeveloper(developerIDTO);
         developerRepository.save(developer);
-        authRepository.save(myUser);
     }
 
     public void updateDeveloper(Integer userId, DeveloperIDTO developerIDTO) {
@@ -170,6 +171,16 @@ public class DeveloperService {
             return 0.0;
         }
         return (double) totalRating / reviewCount;
+      
+    public Developer convertDeveloperDTOToDeveloper(DeveloperIDTO developerIDTO) {
+        Developer developer = new Developer();
+        MyUser myUser = new MyUser(null, developerIDTO.getUsername(), developerIDTO.getPassword(), developerIDTO.getName()
+                , developerIDTO.getEmail(), developerIDTO.getPhoneNumber(), "DEVELOPER",null,null,null);
+        developer.setMyUser(myUser);
+
+        authRepository.save(myUser);
+
+        return developer;
     }
 
 }

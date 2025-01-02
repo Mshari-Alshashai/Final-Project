@@ -12,5 +12,5 @@ public interface ReviewRepository extends CrudRepository<Review, Integer> {
 
     List<Review> findByGameId(Integer gameId);
 
-
+    List<Review> findReviewsByPlayer_Id(Integer playerId);
 }
