@@ -36,10 +36,6 @@ public class DeveloperService {
     }
 
     public void register(DeveloperIDTO developerIDTO) {
-        Developer developer = new Developer();
-        MyUser myUser = new MyUser(null, developerIDTO.getUsername(), developerIDTO.getPassword(), developerIDTO.getName(), developerIDTO.getEmail(), developerIDTO.getPhoneNumber(), "DEVELOPER", null, null, null);
-
-        developer.setMyUser(myUser);
         Developer developer = convertDeveloperDTOToDeveloper(developerIDTO);
         developerRepository.save(developer);
     }
@@ -158,8 +154,8 @@ public class DeveloperService {
             throw new ApiException("review is empty");
         }
 
-        Integer totalRating = 0;
-        Integer reviewCount = 0;
+        int totalRating = 0, reviewCount = 0;
+
 
         for (Review review : reviews) {
             if (review != null) {
@@ -171,6 +167,7 @@ public class DeveloperService {
             return 0.0;
         }
         return (double) totalRating / reviewCount;
+    }
       
     public Developer convertDeveloperDTOToDeveloper(DeveloperIDTO developerIDTO) {
         Developer developer = new Developer();
