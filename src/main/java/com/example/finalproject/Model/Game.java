@@ -45,7 +45,7 @@ public class Game {
 
     @ManyToOne
     @JsonIgnore
-    private WishList wishlist;
+    private Wishlist wishlist;
 
     @ManyToOne
     @JsonIgnore

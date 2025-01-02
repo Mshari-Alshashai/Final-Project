@@ -35,7 +35,7 @@ public class Player {
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private WishList wishList;
+    private Wishlist wishList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private Set<Request> requests;

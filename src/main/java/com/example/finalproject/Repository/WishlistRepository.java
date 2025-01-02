@@ -1,10 +1,10 @@
 package com.example.finalproject.Repository;
 
-import com.example.finalproject.Model.Game;
+import com.example.finalproject.Model.Wishlist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GameRepository extends JpaRepository<Game,Integer> {
-    Game findGameById(Integer id);
+public interface WishlistRepository extends JpaRepository<Wishlist, Integer> {
+    Wishlist findWishlistById(Integer id);
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class WishList {
+public class Wishlist {
 
     @Id
     private Integer id;
