@@ -25,12 +25,8 @@ public class ReviewerService {
     }
 
     public void register(ReviewerIDTO reviewerIDTO) {
-        Reviewer reviewer = new Reviewer();
-        MyUser myUser = new MyUser(null, reviewerIDTO.getUsername(), reviewerIDTO.getPassword(), reviewerIDTO.getName(), reviewerIDTO.getEmail(), reviewerIDTO.getPhoneNumber(), "Reviewer",null,null,null);
-
-        reviewer.setMyUser(myUser);
+        Reviewer reviewer = convertReviewerIDTOToReviewer(reviewerIDTO);
         reviewerRepository.save(reviewer);
-        authRepository.save(myUser);
     }
 
     public void updateReviewer(Integer userId, ReviewerIDTO reviewerIDTO) {
@@ -64,5 +60,17 @@ public class ReviewerService {
 
         reviewerRepository.delete(oldReviewer);
         authRepository.delete(user);
+    }
+
+    public Reviewer convertReviewerIDTOToReviewer(ReviewerIDTO reviewerIDTO) {
+        Reviewer reviewer = new Reviewer();
+        MyUser myUser = new MyUser(null, reviewerIDTO.getUsername(), reviewerIDTO.getPassword(), reviewerIDTO.getName()
+                , reviewerIDTO.getEmail(), reviewerIDTO.getPhoneNumber(), "REVIEWER",null,null,null);
+
+        reviewer.setMyUser(myUser);
+        reviewer.setBio(reviewerIDTO.getBio());
+
+        authRepository.save(myUser);
+        return reviewer;
     }
 }

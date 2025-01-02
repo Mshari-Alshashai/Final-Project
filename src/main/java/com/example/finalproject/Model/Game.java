@@ -30,7 +30,7 @@ public class Game {
     @PositiveOrZero(message = "Price must be positive")
     private Double price;
     @Column(columnDefinition = "date")
-    private LocalDate releaseDate = LocalDate.now();
+    private LocalDate releaseDate ;
     @NotEmpty(message = "Empty name")
     @Column(nullable = false)
     private String size;
