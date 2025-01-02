@@ -1,10 +1,10 @@
 package com.example.finalproject.Repository;
 
-import com.example.finalproject.Model.MyUser;
+import com.example.finalproject.Model.Engine;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MyUserRepository extends JpaRepository<MyUser,Integer> {
-    MyUser findMyUserById(Integer id);
+public interface EngineRepository extends JpaRepository<Engine, Integer> {
+    Engine findEngineById(Integer id);
 }
