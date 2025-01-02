@@ -16,12 +16,8 @@ public class PlayerService {
     private final AuthRepository authRepository;
 
     public void register(PlayerIDTO playerIDTO) {
-        Player player = new Player();
-        MyUser myUser = new MyUser(null, playerIDTO.getUsername(), playerIDTO.getPassword(), playerIDTO.getName(), playerIDTO.getEmail(), playerIDTO.getPhoneNumber(), "PLAYER",null,null,null);
-
-        player.setMyUser(myUser);
+        Player player = convertPlayerIDTOToPlayer(playerIDTO);
         playerRepository.save(player);
-        authRepository.save(myUser);
     }
 
     public Player getMyPlayer(Integer userId) {
@@ -62,6 +58,15 @@ public class PlayerService {
     }
 
 
+    public Player convertPlayerIDTOToPlayer(PlayerIDTO playerIDTO) {
+        Player player = new Player();
+        MyUser myUser = new MyUser(null, playerIDTO.getUsername(), playerIDTO.getPassword(), playerIDTO.getName()
+                , playerIDTO.getEmail(), playerIDTO.getPhoneNumber(), "PLAYER",null,null,null);
+
+        player.setMyUser(myUser);
+        authRepository.save(myUser);
+        return player;
+    }
 
 
 }

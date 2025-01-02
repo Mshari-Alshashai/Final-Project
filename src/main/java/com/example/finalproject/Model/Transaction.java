@@ -35,5 +35,8 @@ public class Transaction {
     @JsonIgnore
     private Request request;
 
+    @ManyToOne
+    @JsonIgnore
+    private Analytics analytics;
 
 }

@@ -38,4 +38,7 @@ public class Analytics {
     @MapsId
     @JsonIgnore
     private Game game;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "analytics")
+    private Set<Transaction> transactions;
 }

@@ -14,9 +14,12 @@ import java.util.Set;
 @Repository
 public interface GameRepository extends JpaRepository<Game,Integer> {
     Game findGameById(Integer id);
+
     boolean existsByDeveloper(Developer developer);
 
     @Query("SELECT g FROM Game g JOIN g.badges b WHERE b.badgeId = :badgeId")
     List<Game> findGamesByBadgeId(@Param("badgeId") Integer badgeId);
+
+
 
 }
