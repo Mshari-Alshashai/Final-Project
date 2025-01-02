@@ -25,6 +25,7 @@ public class Request {
     @Column(nullable = false)
     private String type;
 
+
     private LocalDateTime requestDate;
 
     @Column(nullable = false)
