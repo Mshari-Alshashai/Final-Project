@@ -10,5 +10,7 @@ import java.util.List;
 public interface ReviewRepository extends CrudRepository<Review, Integer> {
     Review findReviewByReviewId(Integer reviewId);
 
+    List<Review> findByGameId(Integer gameId);
+
     List<Review> findReviewsByPlayer_Id(Integer playerId);
 }
