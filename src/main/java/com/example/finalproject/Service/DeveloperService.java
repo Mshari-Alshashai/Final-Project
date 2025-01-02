@@ -27,12 +27,8 @@ public class DeveloperService {
     }
 
     public void register(DeveloperIDTO developerIDTO) {
-        Developer developer = new Developer();
-        MyUser myUser = new MyUser(null, developerIDTO.getUsername(), developerIDTO.getPassword(), developerIDTO.getName(), developerIDTO.getEmail(), developerIDTO.getPhoneNumber(), "DEVELOPER",null,null,null);
-
-        developer.setMyUser(myUser);
+        Developer developer = convertDeveloperDTOToDeveloper(developerIDTO);
         developerRepository.save(developer);
-        authRepository.save(myUser);
     }
 
     public void updateDeveloper(Integer userId, DeveloperIDTO developerIDTO) {
@@ -65,6 +61,17 @@ public class DeveloperService {
 
         developerRepository.delete(oldDeveloper);
         authRepository.delete(user);
+    }
+
+    public Developer convertDeveloperDTOToDeveloper(DeveloperIDTO developerIDTO) {
+        Developer developer = new Developer();
+        MyUser myUser = new MyUser(null, developerIDTO.getUsername(), developerIDTO.getPassword(), developerIDTO.getName()
+                , developerIDTO.getEmail(), developerIDTO.getPhoneNumber(), "DEVELOPER",null,null,null);
+        developer.setMyUser(myUser);
+
+        authRepository.save(myUser);
+
+        return developer;
     }
 
 }
