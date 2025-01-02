@@ -18,6 +18,7 @@ public class DeveloperService {
     private final DeveloperRepository developerRepository;
     private final AuthRepository authRepository;
 
+    //Get developer by id
     public Developer getMyDeveloper(Integer userId) {
         MyUser user = authRepository.findMyUserById(userId);
         if(user == null) throw new ApiException("user not found");
