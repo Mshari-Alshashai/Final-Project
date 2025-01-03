@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 public class Transaction {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer transactionId;
 
     @Column(unique = true, nullable = false)
@@ -30,10 +32,17 @@ public class Transaction {
     @Column(nullable = false)
     private String status;
 
-    @OneToOne
-    @MapsId
+    @Column(nullable = false, unique = true)
+    private String activationCode;
+
+    @ManyToOne
     @JsonIgnore
-    private Request request;
+    private Game game;
+
+    @ManyToOne
+    @JsonIgnore
+    private Player player;
+
 
     @ManyToOne
     @JsonIgnore

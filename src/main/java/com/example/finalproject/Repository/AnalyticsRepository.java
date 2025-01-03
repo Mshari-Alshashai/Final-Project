@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface AnalyticsRepository extends JpaRepository<Analytics, Integer> {
     Analytics findAnalyticsById(Integer id);
 
+    Analytics findAnalyticsByGame_Id(Integer gameId);
 
 }

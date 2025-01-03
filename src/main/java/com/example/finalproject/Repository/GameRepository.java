@@ -4,6 +4,9 @@ import com.example.finalproject.Model.Badge;
 import com.example.finalproject.Model.Developer;
 import com.example.finalproject.Model.Game;
 import com.example.finalproject.Model.Genre;
+
+import jakarta.validation.constraints.NotEmpty;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +20,8 @@ import java.util.Set;
 public interface GameRepository extends JpaRepository<Game,Integer> {
     Game findGameById(Integer id);
 
+    Game findGameByName(String name);
+
     Game findGameByIdAndDeveloperId(Integer id, Integer developerId);
 
     List<Game> findGamesByDeveloper(Developer developer);
@@ -26,6 +31,11 @@ public interface GameRepository extends JpaRepository<Game,Integer> {
     @Query("SELECT g FROM Game g JOIN g.badges b WHERE b.badgeId = :badgeId")
     List<Game> findGamesByBadgeId(@Param("badgeId") Integer badgeId);
 
+
+    List<Game> findGamesByDeveloper(Developer developer);
+
+    List<Game> findGamesByGenre(Genre genre);
+
     List<Game> findByPriceBetween(Double minPrice, Double maxPrice);
 
     List<Game> findAllByDeveloper_Id(Integer developerId);
@@ -33,6 +43,7 @@ public interface GameRepository extends JpaRepository<Game,Integer> {
     List<Game> findByReleaseDateBetween(LocalDate startDate, LocalDate endDate);
 
     List<Game> findByReleaseDateAfter(LocalDate date);
+
 
 
 }

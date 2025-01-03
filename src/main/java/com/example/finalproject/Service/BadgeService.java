@@ -5,6 +5,7 @@ import com.example.finalproject.Model.Badge;
 import com.example.finalproject.Model.Game;
 import com.example.finalproject.Model.Badge;
 import com.example.finalproject.Repository.BadgeRepository;
+import com.example.finalproject.Repository.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,29 +17,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BadgeService {
     private final BadgeRepository badgeRepository;
+    private final GameRepository gameRepository;
 
-//
-//    public List<BadgeODTO> getAllBadges() {
-//        return listToDTO(badgeRepository.findAll());
-//    }
-//
-//
-//    public List<BadgeODTO> listToDTO(List<Badge> badges){
-//
-//        List<BadgeODTO> badgeODTO = new ArrayList<>() ;
-//
-//        for (Badge badge1 : badges){
-//            BadgeODTO badgeODTO1 = new BadgeODTO();
-//
-//            badgeODTO1.setGames(badge1.getGames());
-//            badgeODTO1.setName(badge1.getName());
-//            badgeODTO1.setDescription(badge1.getDescription());
-//            badgeODTO.add(badgeODTO1);
-//        }
-//        return badgeODTO;
-//
-//    }
 
+    public void assignBadge() {
+        List<Game> games = gameRepository.findAll();
+            for (Game game : games) {
+
+                if (game.getAnalytics().getTotalDownloads() > 2000){
+                    game.getBadges().add(badgeRepository.findBadgeByBadgeId(1));
+                }
+
+                if (game.getAnalytics().getAverageRating() > 4.5){
+                    game.getBadges().add(badgeRepository.findBadgeByBadgeId(2));
+                }
+
+                gameRepository.save(game);
+            }
+    }
 
 
 

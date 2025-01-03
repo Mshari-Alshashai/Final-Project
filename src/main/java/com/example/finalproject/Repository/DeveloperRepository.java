@@ -11,7 +11,7 @@ import java.util.List;
 public interface DeveloperRepository extends JpaRepository<Developer, Integer> {
     Developer findDeveloperById(Integer id);
 
-     List<Developer> findGameById(Integer id) ;
+
 
 
 

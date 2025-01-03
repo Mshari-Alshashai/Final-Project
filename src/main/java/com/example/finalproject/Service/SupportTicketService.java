@@ -34,13 +34,13 @@ public class SupportTicketService {
             throw new ApiException("User not found");
         }
         SupportTicket supportTicket = convertIDToToTicket(supportTicketIDTO);
-        Request request = new Request(null,"SUPPORT",LocalDateTime.now(),"PENDING",null,null,null,null,supportTicket,null);
+        Request request = new Request(null,"SUPPORT",LocalDateTime.now(),"PENDING",null,null,null,null,supportTicket);
         requestService.addRequest(request);
     }
 
 
-public  SupportTicket convertIDToToTicket(SupportTicketIDTO supportTicketIDTO){
-     return new SupportTicket(null,supportTicketIDTO.getTitle(),supportTicketIDTO.getDescription(),"PENDING", LocalDateTime.now(),null);
+    public  SupportTicket convertIDToToTicket(SupportTicketIDTO supportTicketIDTO){
+        return new SupportTicket(null,supportTicketIDTO.getTitle(),supportTicketIDTO.getDescription(),"PENDING", LocalDateTime.now(),null);
     }
 
     public List<SupportTicketODTO> convertTicketToTicketODTO(List<SupportTicket> supportTickets){

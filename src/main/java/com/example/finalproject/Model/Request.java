@@ -51,9 +51,4 @@ public class Request {
     @PrimaryKeyJoinColumn
     private SupportTicket supportTicket;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Transaction transaction;
-
-
 }

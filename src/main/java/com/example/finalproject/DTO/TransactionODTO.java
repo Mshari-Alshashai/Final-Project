@@ -14,4 +14,5 @@ public class TransactionODTO {
     private LocalDateTime transactionDate;
     private Double amount;
     private String status;
+    private String activationCode;
 }

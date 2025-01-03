@@ -42,4 +42,7 @@ public class Player {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private Set<Review> reviews;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    private Set<Transaction> transactions;
 }

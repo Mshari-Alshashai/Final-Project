@@ -171,12 +171,11 @@ public class DeveloperService {
 
 
 
-    public List<DeveloperODTO> getAllMyGames(Integer userId) {
+    public List<GameODTO> getAllMyGames(Integer userId) {
         MyUser user = authRepository.findMyUserById(userId);
         if (user == null) throw new ApiException("user not found");
 
-        Developer developer = developerRepository.findDeveloperById(user.getId());
-        if (developer == null) throw new ApiException("developer not found");
+        Developer developer = developerRepository.findDeveloperById(userId);
 
         List<GameODTO> gameODTOS = new ArrayList<>();
         for (Game game : developer.getGames()) {
@@ -187,27 +186,16 @@ public class DeveloperService {
             gameODTOS.add(gameODTO);
         }
 
-        DeveloperODTO developerODTO = new DeveloperODTO();
-        developerODTO.setGames(gameODTOS);
-
-        List<DeveloperODTO> developerODTOS = new ArrayList<>();
-        developerODTOS.add(developerODTO);
-
-        return developerODTOS;
+        return gameODTOS;
     }
 
-    public DeveloperODTO searchMyGame(Integer userId, Integer gameId) {
+    public GameODTO searchMyGame(Integer userId, String gameName) {
         MyUser user = authRepository.findMyUserById(userId);
         if (user == null) {
             throw new ApiException("User not found");
         }
 
-        Developer developer = developerRepository.findDeveloperById(user.getId());
-        if (developer == null) {
-            throw new ApiException("Developer not found");
-        }
-
-        Game game = gameRepository.findGameByIdAndDeveloperId(gameId, developer.getId());
+        Game game = gameRepository.findGameByName(gameName);
         if (game == null) {
             throw new ApiException("Game not found");
         }
@@ -217,54 +205,33 @@ public class DeveloperService {
         gameODTO.setPrice(game.getPrice());
         gameODTO.setSize(game.getSize());
 
-        DeveloperODTO developerODTO = new DeveloperODTO();
-        developerODTO.setGames(Collections.singletonList(gameODTO));
 
-        return developerODTO;
+        return gameODTO;
     }
 
-    public double getAverageRatingForGame(Integer developerId, Integer gameId) {
-
-        Developer developer = developerRepository.findDeveloperById(developerId);
-        if (developer == null) {
-            throw new ApiException("Developer not found");
-        }
+    public Double getAverageRatingForGame(Integer userId, Integer gameId) {
+        Developer developer = developerRepository.findDeveloperById(userId);
+        if (developer == null) throw new ApiException("Developer not found");
 
 
-        Game targetGame = null;
-        Set<Game> developerGames = developer.getGames();
-        if (developerGames != null) {
-            for (Game game : developerGames) {
-                if (game != null && game.getId().equals(gameId)) {
-                    targetGame = game;
-                    break;
-                }
-            }
-        }
+        Game targetGame = gameRepository.findGameByIdAndDeveloperId(gameId, userId);
 
-        if (targetGame == null) {
-            throw new ApiException("Game not found or does not belong to this developer");
-        }
+        if (targetGame == null) throw new ApiException("Game not found or does not belong to this developer");
 
 
-        List<Review> reviews = reviewRepository.findByGameId(gameId);
-        if (reviews == null || reviews.isEmpty()) {
-            throw new ApiException("review is empty");
-        }
+        List<Review> reviews = reviewRepository.findReviewByGameId(gameId);
+        if (reviews.isEmpty()) throw new ApiException("review is empty");
 
-        int totalRating = 0, reviewCount = 0;
-
+        Double totalRating = 0.0, reviewCount = 0.0;
 
         for (Review review : reviews) {
-            if (review != null) {
                 totalRating += review.getRating();
                 reviewCount++;
-            }
         }
         if (reviewCount == 0) {
             return 0.0;
         }
-        return (double) totalRating / reviewCount;
+        return totalRating / reviewCount;
     }
       
     public Developer convertDeveloperDTOToDeveloper(DeveloperIDTO developerIDTO) {
