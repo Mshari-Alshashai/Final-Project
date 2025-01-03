@@ -4,10 +4,7 @@ import com.example.finalproject.Api.ApiResponse;
 import com.example.finalproject.Service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +17,7 @@ public class TransactionController {
         return ResponseEntity.status(200).body(transactionService.calculateTotalEarnings(userId, gameId));
     }
 
+    @PostMapping("/buy-game/{userId}/{gameId}")
     public ResponseEntity buyGame(@PathVariable Integer userId, @PathVariable Integer gameId) {
 
         return ResponseEntity.status(200).body(transactionService.buyGame(userId, gameId));
