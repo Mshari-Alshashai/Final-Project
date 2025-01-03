@@ -20,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TransactionService {
     private final TransactionRepository transactionRepository;
+
     private final GameRepository gameRepository;
     private final PlayerRepository playerRepository;
     private final AuthRepository authRepository;
@@ -68,5 +69,6 @@ public class TransactionService {
         return new TransactionODTO(transaction.getOrderNumber(),LocalDateTime.now()
                 ,transaction.getAmount(),transaction.getStatus(),transaction.getActivationCode());
     }
+
 
 }

@@ -2,12 +2,17 @@ package com.example.finalproject.Service;
 
 import com.example.finalproject.Api.ApiException;
 import com.example.finalproject.DTO.PlayerIDTO;
+import com.example.finalproject.Model.Game;
 import com.example.finalproject.Model.MyUser;
 import com.example.finalproject.Model.Player;
 import com.example.finalproject.Repository.AuthRepository;
 import com.example.finalproject.Repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,8 +63,6 @@ public class PlayerService {
     }
 
 
-
-
     public Player convertPlayerIDTOToPlayer(PlayerIDTO playerIDTO) {
         Player player = new Player();
         MyUser myUser = new MyUser(null, playerIDTO.getUsername(), playerIDTO.getPassword(), playerIDTO.getName()
@@ -69,6 +72,5 @@ public class PlayerService {
         authRepository.save(myUser);
         return player;
     }
-
 
 }

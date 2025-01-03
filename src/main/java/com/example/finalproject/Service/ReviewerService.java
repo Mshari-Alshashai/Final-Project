@@ -2,19 +2,21 @@ package com.example.finalproject.Service;
 
 import com.example.finalproject.Api.ApiException;
 import com.example.finalproject.DTO.ReviewerIDTO;
-import com.example.finalproject.Model.Developer;
-import com.example.finalproject.Model.MyUser;
-import com.example.finalproject.Model.Reviewer;
+import com.example.finalproject.Model.*;
 import com.example.finalproject.Repository.AuthRepository;
+import com.example.finalproject.Repository.GameRepository;
 import com.example.finalproject.Repository.ReviewerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class ReviewerService {
     private final ReviewerRepository reviewerRepository;
     private final AuthRepository authRepository;
+    private final GameRepository gameRepository;
 
     public Reviewer getMyReviewer(Integer userId) {
         MyUser user = authRepository.findMyUserById(userId);
@@ -61,6 +63,7 @@ public class ReviewerService {
         reviewerRepository.delete(oldReviewer);
         authRepository.delete(user);
     }
+
 
     public Reviewer convertReviewerIDTOToReviewer(ReviewerIDTO reviewerIDTO) {
         Reviewer reviewer = new Reviewer();

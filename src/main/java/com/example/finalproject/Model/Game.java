@@ -45,6 +45,7 @@ public class Game {
     @Column(nullable = false)
     private String size;
 
+
     @ManyToOne
     @JsonIgnore
     private Developer developer;
