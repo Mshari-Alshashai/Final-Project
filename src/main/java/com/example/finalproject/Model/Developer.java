@@ -37,5 +37,4 @@ public class Developer {
     private Set<Game> games;
 
 
-    private Analytics analytics;
 }
