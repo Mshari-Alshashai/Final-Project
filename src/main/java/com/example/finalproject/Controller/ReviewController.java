@@ -38,4 +38,13 @@ public class ReviewController {
         reviewService.deleteReview(userId,reviewId);
         return ResponseEntity.status(200).body(new ApiResponse("Review deleted successfully"));
     }
+
+    @GetMapping("/calculate-avg-rating/{gameId}")
+    public ResponseEntity calculateAverageRating(@PathVariable Integer gameId){
+        return ResponseEntity.status(200).body(reviewService.calculateAverageRating(gameId));
+    }
+
+
+
+
 }

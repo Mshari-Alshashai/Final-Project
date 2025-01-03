@@ -20,4 +20,5 @@ public class AnalyticsService {
         return new AnalyticsODTO(analytics.getTotalDownloads(),analytics.getActivePlayers(),analytics.getAveragePlayTime(),analytics.getAverageRating());
 
     }
+
 }

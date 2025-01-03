@@ -2,6 +2,8 @@ package com.example.finalproject.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,8 @@ public class Review {
     private String reviewText;
 
     @Column(nullable = false)
+    @Min(value= 1,message = "Rating can't be less than 1")
+    @Max(value= 5,message = "Rating can't be more than 5")
     private Integer rating;
 
 
