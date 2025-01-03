@@ -19,6 +19,8 @@ public class Developer {
     @Column(nullable = false)
     private String bio;
 
+    private boolean validated;
+
     @OneToOne
     @MapsId
     @JsonIgnore
@@ -36,6 +38,4 @@ public class Developer {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "developer")
     private Set<Game> games;
 
-
-    private Analytics analytics;
 }

@@ -19,18 +19,28 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class Game {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @NotEmpty(message = "Empty name")
     @Column(nullable = false, unique = true)
     private String name;
+
     @Column(columnDefinition = "DOUBLE not null")
     @NotNull(message = "Empty balance")
     @PositiveOrZero(message = "Price must be positive")
     private Double price;
+
+    @Column
+    private Double originalPrice;
+
     @Column(columnDefinition = "date")
     private LocalDate releaseDate ;
+
+    private boolean validatedForRelease;
+
     @NotEmpty(message = "Empty name")
     @Column(nullable = false)
     private String size;
@@ -60,10 +70,16 @@ public class Game {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
     private Set<Review> reviews;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
+    private Set<Transaction> transactions;
+
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Analytics analytics;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
     private Set<Request> requests;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
+    private Set<Image> images;
 }
